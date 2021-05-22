@@ -1,20 +1,29 @@
-import React from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
 
 export default function useCreatePost() {
-  const [state, setState] = React.useReducer((_, action) => action, {
-    isIdle: true,
+  const queryClient = useQueryClient()
+  return useMutation((newPost) => axios.post('/api/posts', newPost), {
+    onMutate: async (newPost) => {
+      // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries('posts')
+
+      // Snapshot the previous value
+      const previousPosts = queryClient.getQueryData('posts')
+
+      // Optimistically update to the new value
+      queryClient.setQueryData('posts', (old) => [...old, newPost])
+
+      // Return a context object with the snapshotted value
+      return { previousPosts }
+    },
+    // If the mutation fails, use the context returned from onMutate to roll back
+    onError: (err, newPost, context) => {
+      queryClient.setQueryData('posts', context.previousTodos)
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries('posts')
+    },
   })
-
-  const mutate = React.useCallback(async (values) => {
-    setState({ isLoading: true })
-    try {
-      const data = axios.post('/api/posts', values).then((res) => res.data)
-      setState({ isSuccess: true, data })
-    } catch (error) {
-      setState({ isError: true, error })
-    }
-  }, [])
-
-  return [mutate, state]
 }
