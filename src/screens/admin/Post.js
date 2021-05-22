@@ -15,13 +15,8 @@ export default function Post() {
   const navigate = useNavigate()
 
   const postQuery = usePost(postId)
-  const [savePost, savePostInfo] = useSavePost()
+  const { mutate, isLoading, isError, isSuccess } = useSavePost()
   const [deletePost, deletePostInfo] = useDeletePost()
-
-  const onSubmit = async (values) => {
-    await savePost(values)
-    postQuery.fetch()
-  }
 
   const onDelete = async () => {
     await deletePost(postId)
@@ -42,13 +37,13 @@ export default function Post() {
           </p>
           <PostForm
             initialValues={postQuery.data}
-            onSubmit={onSubmit}
+            onSubmit={mutate}
             submitText={
-              savePostInfo.isLoading
+              isLoading
                 ? 'Saving...'
-                : savePostInfo.isError
+                : isError
                 ? 'Error!'
-                : savePostInfo.isSuccess
+                : isSuccess
                 ? 'Saved!'
                 : 'Save Post'
             }
