@@ -1,9 +1,14 @@
-import axios from 'axios'
 import { useMutation, useQueryClient } from 'react-query'
+
+const deletePost = (postId) =>
+  fetch(`/api/posts/${postId}`, {
+    method: 'DELETE',
+    body: JSON.stringify(postId),
+  })
 
 export default function useDeletePost() {
   const queryClient = useQueryClient()
-  return useMutation((postId) => axios.delete(`/api/posts/${postId}`), {
+  return useMutation(deletePost, {
     onMutate: async (postId) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries('posts')
