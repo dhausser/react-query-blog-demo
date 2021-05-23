@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+import { Post } from '../../types'
 
 const fetchPosts = () =>
   fetch('/api/posts')
@@ -8,5 +9,5 @@ const fetchPosts = () =>
     })
 
 export default function usePosts() {
-  return useQuery('posts', fetchPosts)
+  return useQuery<Post[], Error>('posts', fetchPosts)
 }

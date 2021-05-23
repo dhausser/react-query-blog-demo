@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from 'react-query'
+import { Post } from '../../types'
 
 const fetchPost = (postId) =>
   fetch(`/api/posts/${postId}`)
@@ -8,10 +9,12 @@ const fetchPost = (postId) =>
     })
 
 export default function usePost(postId) {
-  const queryClient = new useQueryClient()
-  return useQuery(['posts', postId], () => fetchPost(postId), {
+  const queryClient = useQueryClient()
+  return useQuery<Post, Error>(['posts', postId], () => fetchPost(postId), {
     initialData: () => {
-      return queryClient.getQueryData('posts')?.find((d) => d.id == postId)
+      return queryClient
+        .getQueryData<Post[]>('posts')
+        ?.find((d) => d.id == postId)
     },
   })
 }
