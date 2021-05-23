@@ -1,12 +1,13 @@
 import { useQuery, useQueryClient } from 'react-query'
-import { Post } from '../../types'
+import { Post } from 'types'
 
-const fetchPost = (postId) =>
-  fetch(`/api/posts/${postId}`)
+function fetchPost(postId): Promise<Post> {
+  return fetch(`/api/posts/${postId}`)
     .then((res) => res.json())
     .catch((error) => {
       throw new Error(error)
     })
+}
 
 export default function usePost(postId) {
   const queryClient = useQueryClient()
