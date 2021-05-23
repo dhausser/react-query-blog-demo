@@ -7,6 +7,8 @@ const savePost = (newPost) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newPost),
+  }).catch((error) => {
+    throw new Error(error)
   })
 
 export default function useSavePost() {

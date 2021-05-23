@@ -7,6 +7,8 @@ const createPost = (newPost) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newPost),
+  }).catch((error) => {
+    throw new Error(error)
   })
 
 export default function useCreatePost() {
@@ -15,9 +17,6 @@ export default function useCreatePost() {
     onMutate: async (newPost) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries('posts')
-
-      console.log(newPost)
-      console.log(JSON.stringify(newPost))
 
       // Snapshot the previous value
       const previousPosts = queryClient.getQueryData('posts')
