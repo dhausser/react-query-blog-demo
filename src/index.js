@@ -22,11 +22,11 @@ function SafeHydrate({ children }) {
 }
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: Infinity,
-    },
-  },
+  // defaultOptions: {
+  //   queries: {
+  //     staleTime: Infinity,
+  //   },
+  // },
 })
 
 export default function App() {
