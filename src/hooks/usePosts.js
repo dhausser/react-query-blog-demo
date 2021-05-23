@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 
+const fetchPosts = () => fetch('/api/posts').then((res) => res.json())
+
 export default function usePosts() {
-  return useQuery('posts', () =>
-    fetch('/api/posts').then((response) => response.json())
-  )
+  return useQuery('posts', fetchPosts)
 }
