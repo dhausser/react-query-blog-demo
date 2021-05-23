@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from 'react-query'
 
-export const fetchPost = (postId) =>
+const fetchPost = (postId) =>
   fetch(`/api/posts/${postId}`).then((res) => res.json())
 
 export default function usePost(postId) {
