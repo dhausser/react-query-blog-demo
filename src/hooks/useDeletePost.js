@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query'
 const deletePost = (postId) =>
   fetch(`/api/posts/${postId}`, {
     method: 'DELETE',
-    body: JSON.stringify(postId),
+    body: postId,
   })
 
 export default function useDeletePost() {
