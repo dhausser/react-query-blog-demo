@@ -1,5 +1,5 @@
 import React from 'react'
-import App from 'next/app'
+import App, { AppProps } from 'next/app'
 import { createGlobalStyle } from 'styled-components'
 import normalize from 'styled-normalize'
 
@@ -32,14 +32,13 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return (
-      <>
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </>
-    )
-  }
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </>
+  )
 }
+
+export default MyApp
