@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
@@ -22,7 +23,13 @@
     "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/react-hooks": "^7.0.0",
+    "@types/jest": "^26.0.23",
     "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "@types/testing-library__jest-dom": "^5.9.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "10.1.0",
     "eslint": "7.27.0",
@@ -39,6 +46,8 @@
     "eslint-plugin-react": "7.23.2",
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-standard": "^5.0.0",
+    "jest": "^27.0.3",
+    "react-test-renderer": "^17.0.2",
     "typescript": "^4.2.4"
   }
 }
