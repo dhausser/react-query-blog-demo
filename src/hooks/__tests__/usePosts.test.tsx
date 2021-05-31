@@ -14,10 +14,10 @@ test('renders custom hook', async () => {
   expect(result.current.data).toEqual('Hello')
 })
 
-test('renders use posts hook', async () => {
-  const { result, waitFor } = renderHook(() => usePosts())
+// test('renders use posts hook', async () => {
+//   const { result, waitFor } = renderHook(() => usePosts())
 
-  await waitFor(() => result.current.isSuccess)
+//   await waitFor(() => result.current.isSuccess)
 
-  expect(result.current.data).toEqual([])
-})
+//   expect(result.current.data).toEqual([])
+// })
