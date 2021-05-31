@@ -1,6 +1,7 @@
+const path = require('path')
+
 module.exports = {
-  roots: ['<rootDir>/src'],
   testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  moduleDirectories: ['node_modules', 'src'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  moduleDirectories: ['node_modules', path.join(__dirname, 'src')],
 }
