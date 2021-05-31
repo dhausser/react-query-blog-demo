@@ -13,29 +13,35 @@ import AdminPost from './screens/admin/Post'
 import Blog from './screens/blog'
 import BlogPost from './screens/blog/Post'
 
-export default function App() {
+export function App() {
+  return (
+    <Wrapper>
+      <GlobalLoader />
+      <Sidebar />
+      <Main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h1>Welcome!</h1>
+              </>
+            }
+          />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:postId" element={<AdminPost />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:postId" element={<BlogPost />} />
+        </Routes>
+      </Main>
+    </Wrapper>
+  )
+}
+
+export default function AppWithProviders() {
   return (
     <AppProviders>
-      <Wrapper>
-        <GlobalLoader />
-        <Sidebar />
-        <Main>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <h1>Welcome!</h1>
-                </>
-              }
-            />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/:postId" element={<AdminPost />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:postId" element={<BlogPost />} />
-          </Routes>
-        </Main>
-      </Wrapper>
+      <App />
       <ReactQueryDevtools />
     </AppProviders>
   )
